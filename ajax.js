@@ -83,8 +83,32 @@ $(document).ready(function() {
             }
         });
     }
+    
 
 
+
+
+    $('.edit-form-control').prop('readonly', true);
+
+    $('.edit-button').on('click', function(e) {
+        e.preventDefault();
+
+        const $btn = $(this);
+        const $input = $btn.siblings('.edit-form-control');
+
+        if ($input.prop('readonly')) {
+        // enable edit mode
+        $input.prop('readonly', false)
+                .css({'border-bottom': '2px solid #0d6efd'}) // show bottom border
+                .focus();
+        $btn.text('Save').css({'background-color': '#0d6efd', 'color': '#fff'});
+        } else {
+        // disable edit mode
+        $input.prop('readonly', true)
+                .css({'border-bottom': '1px solid transparent'}); // hide border
+        $btn.text('Edit').css({'background-color': '', 'color': ''});
+        }
+    });
    
 
     // function fetch_comments() {

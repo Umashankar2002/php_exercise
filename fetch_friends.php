@@ -2,9 +2,9 @@
     include "database.php";
     session_start();
 
-    $userid = $_SESSION["userid"];
+    $userid = $_SESSION["backuserid"];
 
-    $sql = "SELECT tu2.name FROM tUser AS tu
+    $sql = "SELECT tu2.user_id, tu2.name FROM tUser AS tu
             INNER JOIN tFriends AS tf
             ON tu.user_id = tf.user_id
             INNER JOIN tUser AS tu2 ON tf.friend_id = tu2.user_id WHERE tu.user_id = $userid";
@@ -13,11 +13,12 @@
 
         if(mysqli_num_rows($data) > 0) {
             while ($row = mysqli_fetch_assoc($data)) {
+                // $_SESSION["friendname"] = $row["name"];
                 
-                echo   '<div class="friend">
-                            <img src="assets/img/mypicture.png" alt="" width="150px" height="150px">
+                echo   '<a href="home.php?friendid=' . $row["user_id"] . '&friendname=' .$row["name"] . '""><div class="friend">
+                            <img src="assets/img/mypicture.png" alt="" class="friend-list-images">
                             <span class="text-center mt-2 fw-bold">'.$row["name"].'</span>
-                        </div>';
+                        </div></a>';
             }
         }
     }

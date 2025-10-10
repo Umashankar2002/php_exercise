@@ -7,7 +7,8 @@ $email    = $_POST["email"];
 $password = $_POST["password"];
 $address  = $_POST["address"];
 $phone    = $_POST["phone"];
-$user_id  = $_SESSION["userid"];
+$user_id  = $_SESSION['original_userid'];
+// $_SESSION["username"] = $_POST["name"];
 
 try {
     $sql = "UPDATE tUser SET name = ?, email_id = ?, password = ?, address = ?, phone = ? WHERE user_id = ?";

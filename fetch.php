@@ -1,7 +1,21 @@
 <?php 
     include "database.php";
+    session_start();
+    $userid = $_SESSION["backuserid"];
+    $sql = "";
 
-    $sql = "SELECT * FROM tUser AS tu INNER JOIN tWall AS tw ON tu.user_id = tw.user_id ORDER BY tw.posting_date DESC";
+    if($_SESSION['original_userid'] == $userid) {
+        $sql = "SELECT * FROM tUser AS tu 
+            INNER JOIN tWall AS tw ON tu.user_id = tw.user_id  
+            ORDER BY tw.posting_date DESC";
+    }
+    else {
+    $sql = "SELECT * FROM tUser AS tu 
+        INNER JOIN tWall AS tw ON tu.user_id = tw.user_id 
+        WHERE tu.user_id = $userid 
+        ORDER BY tw.posting_date DESC";
+    }
+
     $data = "";
     try {
         $data = mysqli_query($conn, $sql);
@@ -12,6 +26,7 @@
             while($post = mysqli_fetch_assoc($data))
             {
                 $name = $post["name"];
+                $_SESSION["username"] = $name;
                 $comment = $post["post"];
                 $originalDate = $post["posting_date"];
                 $formattedDate = date("F j \a\\t g:i A", strtotime($originalDate));

@@ -22,6 +22,29 @@
         header("Location: index.php");
         exit();
     }
+
+    $log_message = "";
+    if($_SESSION["userid"]) {   
+        $log_message = "Logout";
+    }
+    else {
+        $log_message = "Login";
+    }
+    
+    if (!isset($_SESSION['original_userid'])) {
+        $_SESSION['original_userid'] = $_SESSION['userid'];
+    }
+    // $login_user_id = $_SESSION["userid"];
+    $userenteredid = $_SESSION["userid"];
+    if(isset($_GET['friendid'])) {
+        $userenteredid = $_GET['friendid'];
+    }
+    $_SESSION["backuserid"] = $userenteredid;
+
+    $friend_name = $_SESSION["username"];
+    if(isset($_GET['friendname'])) {
+        $friend_name = $_GET['friendname'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +103,7 @@
                 <span class="profile-name"><div class="d-flex align-items-center gap-2"><img src="assets/img/mypicture.png" alt="" width="40px" height="40px" class="rounded-circle profile"><span class="fw-bold"><?php echo $_SESSION["username"]; ?></span></div></span>
                 <hr class="detail-line">
                 <form action="logout.php" method="post">
-                    <button class="logout">Logout</button>
+                    <button class="logout"><?php echo $log_message; ?></button>
                 </form>
             </div>
 
@@ -96,7 +119,7 @@
                             <img src="assets/img/mark-zuckerberg.jpg" alt="" height="175px" width="175px" class="rounded-circle p-1 mark-image">
 
                             <div class="followers-content">
-                                <h1 class="mark-zuckerberg-text">Mark Zuckerberg
+                                <h1 class="mark-zuckerberg-text"><?php echo $friend_name; ?>
                                     <img src="assets/img/verified-account.svg" alt="">
                                 </h1>
                                 <span class="followers-count">120M followers</span>
@@ -238,7 +261,7 @@
                         <span class="filter-button"><img src="assets/img/filter.svg" alt="" height="18px" width="18px"> <span id="filter-bustton-text">Filters</span></span>
                     </div>
                     <div class="comment-root-container">
-                        <div class="comment-container">
+                        <div class="comment-container <?php if (isset($_GET['friendname'])) echo 'd-none'; ?>">
                             <form method="post" id="commentform">
                                 <textarea class="comment-input-flied" id="comment" placeholder="Enter the comment..."></textarea>
                                 <button class="comment-post-button">Post</button>
@@ -255,7 +278,7 @@
         <!-- logout -->
        <?php 
             include "database.php";
-            $userid = $_SESSION['userid'];
+            $userid = $_SESSION['original_userid'];
             $sql = "SELECT * FROM tUser WHERE user_id = $userid";
 
             try {
@@ -295,23 +318,38 @@
                                 <div class="edit-profile-form-field">
                                     <div class="mb-3">
                                         <label for="name" class="form-label fw-bold">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" value="<?php echo $name; ?>" required>
+                                        <div class="edit-container">
+                                            <input type="text" class="edit-form-control" id="name" name="name" placeholder="Enter your name" value="<?php echo $name; ?>" required>
+                                            <button class="btn btn-secondary edit-button">Edit</button>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label fw-bold">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="<?php echo $email; ?>" required>
+                                        <div class="edit-container">
+                                            <input type="email" class="edit-form-control" id="email" name="email" placeholder="Enter your email" value="<?php echo $email; ?>" required>
+                                            <button class="btn btn-secondary edit-button">Edit</button>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label fw-bold">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password" value="<?php echo $password; ?>" required>
+                                        <div class="edit-container">
+                                            <input type="password" class="edit-form-control" id="password" name="password" placeholder="Enter new password" value="<?php echo $password; ?>" required>
+                                            <button class="btn btn-secondary edit-button">Edit</button>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="address" class="form-label fw-bold">Address</label>
-                                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" value="<?php echo $address; ?>" required>
+                                        <div class="edit-container">
+                                            <input type="text" class="edit-form-control" id="address" name="address" placeholder="Enter your address" value="<?php echo $address; ?>" required>
+                                            <button class="btn btn-secondary edit-button">Edit</button>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="phone" class="form-label fw-bold">Phone</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php echo $phone; ?>" required>
+                                        <div class="edit-container">
+                                            <input type="tel" class="edit-form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php echo $phone; ?>" required>
+                                            <button class="btn btn-secondary edit-button">Edit</button>
+                                        </div>
                                         <span class="fw-bold" id="phone-error"></span>
                                     </div>
                                     <div class="d-flex justify-content-end gap-3">

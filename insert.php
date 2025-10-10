@@ -8,7 +8,7 @@
     $sql = "INSERT INTO tWall (user_id, post) VALUES ($user_id, '$data')";
     try
     {
-        mysqli_query($conn, $sql);
+        $res = mysqli_query($conn, $sql);
     }
     catch(Exception $e) {
         echo $e;

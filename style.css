@@ -14,7 +14,7 @@ body {
 }
 .facebook-container::after {
     content: "";
-    height: 350px;
+    height: 21.875rem;
     width: 100%;
     position: absolute;
     top: 0;
@@ -30,7 +30,7 @@ body {
     --bs-gutter-x: 0rem;
 }
 .navbar-container {
-    height: 56px;
+    height: 3.5rem;
     position: sticky;
     top: 0;
     background-color: white;
@@ -178,7 +178,7 @@ body {
 .card-body {
     padding: 20px;
 }
-.form-control {
+.edit-form-control, .form-control {
     height: 45px;
     border: none;
     /* border-bottom: rgb(168, 166, 166) solid 1px; */
@@ -186,10 +186,10 @@ body {
     outline: none;
     box-shadow: none;
 }
-.form-control:focus {
+.form-control:focus, .edit-form-control:focus {
     border: none;
     box-shadow: none;
-    border-bottom: rgb(168, 166, 166) solid 1px;    
+    /* border-bottom: rgb(168, 166, 166) solid 1px;     */
 }
 #phone-error {
     color: red;
@@ -454,6 +454,11 @@ hr {
 }
 
 /* friends */
+.friend-list-images {
+    height: 150px;
+    width: 150px;
+
+}
 .friends-container {
     margin-top: 15px;
     padding-bottom: 14px;
@@ -594,6 +599,44 @@ hr {
     color: #65686C;
 }
 
+/* edit */
+.edit-container {
+    display: flex;
+    justify-content: space-between;
+}
+.edit-button {
+    height: 25px;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 900;
+}
+.edit-button.active {
+  background-color: #0d6efd;  /* Bootstrap primary blue */
+  color: #fff;
+  border-color: #0d6efd;
+  box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+}
+.edit-form-control {
+    width: 100%;
+}
+
+@media (min-width:1024px) and (max-width:1390px) {
+    #left-nav-input{
+        display: none;
+    }
+    .left-nav-search-symbol {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0px;
+    }
+    
+}
 @media (min-width:768px) and (max-width:1024px) {
     .facebook-container::after {
         background: none;       
@@ -768,9 +811,31 @@ hr {
     #post-container {
         padding-left: 0px;
     }
+    #left-nav-input{
+        display: none;
+    }
+    .left-nav-search-symbol {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0px;
+    }
 }
 
 @media (max-width: 375px) {
+    #left-nav-input{
+        display: none;
+    }
+    .left-nav-search-symbol {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0px;
+    }
      .arrowdown-button {
         padding: 6px 33px 7px 33px;
     }
@@ -874,5 +939,23 @@ hr {
 
     .post-comments {
         width: 93vw;
+    }
+    #printing-comments-section {
+        align-items: center;
+    }
+     /* #comments-main-container {
+        padding-left: 20px;
+        padding-right: 23px;
+    } */
+     #comment-container {
+    width: 300px;
+}
+    .friend-list-images {
+    height: 100px;
+    width: 100px;
+
+}
+#left-nav-input{
+        display: none;
     }
 }
