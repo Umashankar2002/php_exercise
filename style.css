@@ -4,6 +4,9 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+body.modal-open {
+  overflow: hidden;
+}
 .facebook-container{
     display: flex;
     flex-direction: column;;
@@ -455,9 +458,14 @@ hr {
 
 /* friends */
 .friend-list-images {
-    height: 150px;
-    width: 150px;
+    width: 100%;                /* Fill the grid cell */
+    aspect-ratio: 1 / 1;        /* Keep square shape */
+    object-fit: cover;          /* Crop the image to fill */
+    border-radius: 5px;
 
+}
+.friend-name {
+    word-wrap: break-word;
 }
 .friends-container {
     margin-top: 15px;
@@ -472,9 +480,23 @@ hr {
     gap: 5px;
 }
 .friend {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    text-align: center;
+    border: 1px solid #ccc;       /* Light gray border */
+    padding: 0px;                /* Space inside the border */
+    /* margin-left: 10px;  */
+    border-radius: 5px;           /* Optional: makes the corners rounded */
+    background-color: #f9f9f9; 
+    width: 100%;  
+    
+    aspect-ratio: 1 / 1;        /* Keep square shape */
+    object-fit: cover;          /* Crop the image to fill */
+    border-radius: 5px; 
+   
+    
+}
+.friend-link {
+    text-decoration: none;
+    color: black;
 }
 
 /* comment container */
@@ -610,8 +632,18 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
-    font-weight: 900;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    /* font-weight: 900; */
+    border: none;
+    background-color: white;
+    color: #0064D1;
+}
+.edit-hr-line {
+    margin: 30px -20px 0px -20px;
+}
+.edit-button:hover {
+    background-color: #ebe8e8;
 }
 .edit-button.active {
   background-color: #0d6efd;  /* Bootstrap primary blue */
@@ -620,7 +652,12 @@ hr {
   box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
 }
 .edit-form-control {
-    width: 100%;
+    width: 50%;
+    text-align: center;
+}
+.edit-input-field {
+    display: flex;
+    justify-content: center;
 }
 
 @media (min-width:1024px) and (max-width:1390px) {
@@ -910,6 +947,12 @@ hr {
     #post-container {
         padding-left: 0px;
     }
+
+#friends {
+    
+    grid-template-columns: repeat(2, 1fr);
+    
+}
 }
 
 @media (max-width: 325px) {
@@ -950,11 +993,7 @@ hr {
      #comment-container {
     width: 300px;
 }
-    .friend-list-images {
-    height: 100px;
-    width: 100px;
 
-}
 #left-nav-input{
         display: none;
     }

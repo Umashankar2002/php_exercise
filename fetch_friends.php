@@ -13,11 +13,10 @@
 
         if(mysqli_num_rows($data) > 0) {
             while ($row = mysqli_fetch_assoc($data)) {
-                // $_SESSION["friendname"] = $row["name"];
-                
-                echo   '<a href="home.php?friendid=' . $row["user_id"] . '&friendname=' .$row["name"] . '""><div class="friend">
+
+                echo   '<a href="home.php?friendid=' . $row["user_id"] . '&friendname=' .$row["name"] . '"" class="friend-link"><div class="friend">
                             <img src="assets/img/mypicture.png" alt="" class="friend-list-images">
-                            <span class="text-center mt-2 fw-bold">'.$row["name"].'</span>
+                            <span class="text-center mt-2 fw-bold friend-name">'.$row["name"].'</span>
                         </div></a>';
             }
         }

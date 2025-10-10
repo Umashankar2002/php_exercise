@@ -17,6 +17,10 @@
     }
 
     $data = "";
+
+    
+
+
     try {
         $data = mysqli_query($conn, $sql);
         // echo $data;
@@ -26,10 +30,23 @@
             while($post = mysqli_fetch_assoc($data))
             {
                 $name = $post["name"];
-                $_SESSION["username"] = $name;
+                // $_SESSION["username"] = $name;
                 $comment = $post["post"];
-                $originalDate = $post["posting_date"];
-                $formattedDate = date("F j \a\\t g:i A", strtotime($originalDate));
+                // $originalDate = $post["posting_date"];
+
+                $posting_time = strtotime($post['posting_date']);
+                $diff = time() - $posting_time;
+                if($diff < 60) $time_text = "Just now";
+                elseif($diff < 3600) $time_text = floor($diff/60)." min ago";
+                elseif($diff < 86400) $time_text = floor($diff/3600)." hr ago";
+                else $time_text = date("d M Y H:i", $posting_time);
+                // Random counts for likes/comments/shares
+                $likes = rand(100,1000);
+                $comments = rand(10,100);
+                $shares = rand(1,50);
+
+
+                // $formattedDate = date("F j \a\\t g:i A", strtotime($originalDate));
                 echo    '<html>
                         <header>
                             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +65,7 @@
                                                     <span >'.$name.'</span>
                                                 </div>
                                                 <div class="date-of-post">
-                                                    <span>'.$formattedDate.'</span>
+                                                    <span>'.$time_text.'</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -66,12 +83,12 @@
                                         <div>
                                             <img src="assets/img/thumbsup.svg" alt="" height="18px" width="18px" class="thumbsup-symbol">
                                             <img src="assets/img/heart.svg" alt="" height="18px" width="18px" class="heart-symbol">
-                                            <span class="post-like-count">222K</span>
+                                            <span class="post-like-count">'.$likes.'K</span>
                                         </div>
 
                                         <div class="comments-shares-container">
-                                            <span class="comments-count">60K comments</span>
-                                            <span class="shares-count">5.6k shares</span>
+                                            <span class="comments-count">'.$comments.'K comments</span>
+                                            <span class="shares-count">'.$shares.'k shares</span>
                                         </div>
                                     </div>
                                     <div class="post-footer-container">

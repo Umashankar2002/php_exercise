@@ -1,31 +1,45 @@
 
 $(document).ready(function() {
-    $('#profile-logout').on('click', show_logout);
-
-    function show_logout() {
-        console.log($("#profile-details-container").length);
-        
+    // logout 
+    $('#profile-logout').on('click', function(e) {
+        e.stopPropagation();
         $('#profile-details-container').toggle();
-    }
+    });
+
+    $('#profile-details-container').on('click', function(e) {
+        e.stopPropagation();
+    });
+    $('.edit-details-container').on('click', function(e) {
+        e.stopPropagation();
+    });
+    $(document).on('click', function() {
+        $('#profile-details-container').hide();
+    });
 
     $(".profile-name").on("click", show_detail_page);
     function show_detail_page() {
         $(".edit-details-container").show();
     }
 
-     $(".cross-img").on("click", close_details_page);
-    $(".details-cancel-button").on("click", close_details_page);
+    // details page
+    $(".cross-img, .details-cancel-button").on("click", close_details_page);
+
+    $(".edit-details-container").on("click", function (e) {
+        if (!$(e.target).closest('.card').length) {
+            close_details_page();
+        }
+    });
+
     function close_details_page() {
         $(".edit-details-container").hide();
-        $('#profile-details-container').hide();
+        $("#profile-details-container").hide();
+        $("body").removeClass("modal-open");
     }
 
-    
+    // phone number validation
     $('#phone').on('keyup', function() {
         let phone = $(this).val();
         console.log("Phone input value:", phone);
-
-        // Example: Check if 10 digits
         if (phone.length === 10 && /^\d+$/.test(phone)) {
             $("#phone-error").text("");
         } else {
@@ -33,16 +47,12 @@ $(document).ready(function() {
         }
     });
 
-
+    // popup closing
     setTimeout(function () {
         $('.message-popup').slideUp(400, function () {
             $('.message-popup').hide();
         });
     }, 400);
-
-
-
-
 
 
     fetch_comments();
@@ -83,41 +93,43 @@ $(document).ready(function() {
             }
         });
     }
-    
 
-
-
-
+    // for edit page of form visible
     $('.edit-form-control').prop('readonly', true);
-
     $('.edit-button').on('click', function(e) {
         e.preventDefault();
-
         const $btn = $(this);
-        const $input = $btn.siblings('.edit-form-control');
-
+        const $container = $btn.closest('.edit-container');
+        const $input = $container.next('.edit-input-field').find('.edit-form-control');
         if ($input.prop('readonly')) {
-        // enable edit mode
-        $input.prop('readonly', false)
-                .css({'border-bottom': '2px solid #0d6efd'}) // show bottom border
+            $input.data('original-value', $input.val());
+            $input.prop('readonly', false)
+                .css({'border': '2px solid #ccc'})
                 .focus();
-        $btn.text('Save').css({'background-color': '#0d6efd', 'color': '#fff'});
+
+            $btn.text('Cancel').css({'color': '#0064D1', 'font-size': '15px'});
         } else {
-        // disable edit mode
-        $input.prop('readonly', true)
-                .css({'border-bottom': '1px solid transparent'}); // hide border
-        $btn.text('Edit').css({'background-color': '', 'color': ''});
+            const originalValue = $input.data('original-value');
+            if (originalValue !== undefined) {
+                $input.val(originalValue);
+            }
+            $input.prop('readonly', true)
+                .css({'border': '1px solid transparent'});
+
+            $btn.text('Edit').css({'background-color': '', 'color': ''});
         }
     });
-   
 
-    // function fetch_comments() {
-    //     $.ajax({
-    //         url: 'fetch_login_person_details.php',
-    //         method: 'GET',
-    //         success: function(data) {
-    //             $("#profile-details-page").html(data);
-    //         }
-    //     });
-    // }
+    // desable scrolling
+    $('.profile-name').on('click', function () {
+        $('.edit-details-container').fadeIn();
+        $('body').addClass('modal-open');
+    });
+
+    // Close re-enable scroll
+    $('.cross-img, .details-cancel-button').on('click', function () {
+        $('.edit-details-container').fadeOut();
+        $('body').removeClass('modal-open');
+    });
+   
 })

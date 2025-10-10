@@ -45,6 +45,35 @@
     if(isset($_GET['friendname'])) {
         $friend_name = $_GET['friendname'];
     }
+
+
+     
+    // include "database.php";
+    $userid = $_SESSION['original_userid'];
+    $sql = "SELECT * FROM tUser WHERE user_id = $userid";
+
+    try {
+        $result = mysqli_query($conn, $sql);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            $person = mysqli_fetch_assoc($result);
+            $name = htmlspecialchars($person['name']);
+            $email = htmlspecialchars($person['email_id']);
+            $password = htmlspecialchars($person['password']);
+            $address = htmlspecialchars($person['address']);
+            $phone = htmlspecialchars($person['phone']);
+
+        } else {
+            echo "No user found.";
+            exit;
+        }
+    } catch(Exception $e) {
+        echo "Error: " . $e->getMessage();
+        exit;
+    }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +129,7 @@
           ***********************-->
         <div class="facebook-container">
             <div id="profile-details-container">
-                <span class="profile-name"><div class="d-flex align-items-center gap-2"><img src="assets/img/mypicture.png" alt="" width="40px" height="40px" class="rounded-circle profile"><span class="fw-bold"><?php echo $_SESSION["username"]; ?></span></div></span>
+                <span class="profile-name"><div class="d-flex align-items-center gap-2"><img src="assets/img/mypicture.png" alt="" width="40px" height="40px" class="rounded-circle profile"><span class="fw-bold"><?php echo $name; ?></span></div></span>
                 <hr class="detail-line">
                 <form action="logout.php" method="post">
                     <button class="logout"><?php echo $log_message; ?></button>
@@ -276,31 +305,7 @@
         </div>
 
         <!-- logout -->
-       <?php 
-            include "database.php";
-            $userid = $_SESSION['original_userid'];
-            $sql = "SELECT * FROM tUser WHERE user_id = $userid";
-
-            try {
-                $result = mysqli_query($conn, $sql);
-
-                if ($result && mysqli_num_rows($result) > 0) {
-                    $person = mysqli_fetch_assoc($result);
-                    $name = htmlspecialchars($person['name']);
-                    $email = htmlspecialchars($person['email_id']);
-                    $password = htmlspecialchars($person['password']);
-                    $address = htmlspecialchars($person['address']);
-                    $phone = htmlspecialchars($person['phone']);
-
-                } else {
-                    echo "No user found.";
-                    exit;
-                }
-            } catch(Exception $e) {
-                echo "Error: " . $e->getMessage();
-                exit;
-            }
-        ?>
+      
 
         <div class="edit-details-container">
             <div class="d-flex justify-content-center align-items-center min-vh-100">
@@ -308,47 +313,58 @@
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="card-title mb-4 position-relative text-center">
-                                <h3>Edit Details</h3>
+                                <h3 class="fs-5 fw-bold">Edit profile</h3>
                                 <span class="cross-img position-absolute top-0 end-0">
                                     <img src="assets/img/cross1.png" alt="">
                                 </span>
+                                <hr class="edit-hr-line">
                             </div>
 
                             <form action="updating_details.php" method="post">
                                 <div class="edit-profile-form-field">
                                     <div class="mb-3">
-                                        <label for="name" class="form-label fw-bold">Name</label>
                                         <div class="edit-container">
+                                            <label for="name" class="form-label fw-bold">Name</label>
+                                            <button class="edit-button">Edit</button>
+                                        </div>
+                                        <div class="edit-input-field">
                                             <input type="text" class="edit-form-control" id="name" name="name" placeholder="Enter your name" value="<?php echo $name; ?>" required>
-                                            <button class="btn btn-secondary edit-button">Edit</button>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="email" class="form-label fw-bold">Email</label>
                                         <div class="edit-container">
+                                            <label for="email" class="form-label fw-bold">Email</label>
+                                            <button class="edit-button">Edit</button>
+                                        </div>
+                                        <div class="edit-input-field">
                                             <input type="email" class="edit-form-control" id="email" name="email" placeholder="Enter your email" value="<?php echo $email; ?>" required>
-                                            <button class="btn btn-secondary edit-button">Edit</button>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="password" class="form-label fw-bold">Password</label>
                                         <div class="edit-container">
+                                            <label for="password" class="form-label fw-bold">Password</label>
+                                            <button class="edit-button">Edit</button>
+                                        </div>
+                                        <div class="edit-input-field">
                                             <input type="password" class="edit-form-control" id="password" name="password" placeholder="Enter new password" value="<?php echo $password; ?>" required>
-                                            <button class="btn btn-secondary edit-button">Edit</button>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="address" class="form-label fw-bold">Address</label>
                                         <div class="edit-container">
+                                            <label for="address" class="form-label fw-bold">Address</label>
+                                            <button class="edit-button">Edit</button>
+                                        </div>
+                                        <div class="edit-input-field">
                                             <input type="text" class="edit-form-control" id="address" name="address" placeholder="Enter your address" value="<?php echo $address; ?>" required>
-                                            <button class="btn btn-secondary edit-button">Edit</button>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="phone" class="form-label fw-bold">Phone</label>
                                         <div class="edit-container">
+                                            <label for="phone" class="form-label fw-bold">Phone</label>
+                                            <button class="edit-button">Edit</button>
+                                        </div>
+                                        <div class="edit-input-field">
                                             <input type="tel" class="edit-form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php echo $phone; ?>" required>
-                                            <button class="btn btn-secondary edit-button">Edit</button>
                                         </div>
                                         <span class="fw-bold" id="phone-error"></span>
                                     </div>
