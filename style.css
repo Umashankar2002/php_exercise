@@ -182,10 +182,10 @@ body.modal-open {
     padding: 20px;
 }
 .edit-form-control, .form-control {
-    height: 45px;
+    height: 80px;
     border: none;
     /* border-bottom: rgb(168, 166, 166) solid 1px; */
-    border-radius: 0px;
+    border-radius: 10px;
     outline: none;
     box-shadow: none;
 }
@@ -461,7 +461,17 @@ hr {
     width: 100%;                /* Fill the grid cell */
     aspect-ratio: 1 / 1;        /* Keep square shape */
     object-fit: cover;          /* Crop the image to fill */
+    border-radius: 8px;
+
+}
+.friend-see-all-friends-link {
+    font-size: 17px;
+    text-decoration: none;
+    padding: 6px;
     border-radius: 5px;
+}
+.friend-see-all-friends-link:hover {
+    background-color: #faf5f5;
 
 }
 .friend-name {
@@ -477,15 +487,16 @@ hr {
 #friends {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    gap: 10px;
 }
 .friend {
-    text-align: center;
-    border: 1px solid #ccc;       /* Light gray border */
+    /* text-align: center; */
+    font-size: 13px;
+    
     padding: 0px;                /* Space inside the border */
     /* margin-left: 10px;  */
     border-radius: 5px;           /* Optional: makes the corners rounded */
-    background-color: #f9f9f9; 
+    /* background-color: #f9f9f9;  */
     width: 100%;  
     
     aspect-ratio: 1 / 1;        /* Keep square shape */
@@ -494,6 +505,7 @@ hr {
    
     
 }
+
 .friend-link {
     text-decoration: none;
     color: black;
@@ -533,6 +545,9 @@ hr {
     position: absolute;
     right: 14px;
     bottom: 9px;
+}
+.comment-post-button:hover {
+    background-color: #044abb;
 }
 
 /* post comments */
@@ -652,7 +667,7 @@ hr {
   box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
 }
 .edit-form-control {
-    width: 50%;
+    width: 40%;
     text-align: center;
 }
 .edit-input-field {

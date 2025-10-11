@@ -85,11 +85,14 @@ $(document).ready(function() {
                 $('#printing-comments-section').html(data);
             }
         });
+
+        // fetch friends list
         $.ajax({
             url: 'fetch_friends.php',
             method: 'GET',
             success: function(data) {
-                $('#friends').html(data);
+                $('#friends').html(data.html);
+                $('#friend-count').text(data.count + " friends");
             }
         });
     }

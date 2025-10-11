@@ -278,8 +278,14 @@
                     
                     <!-- friends list -->
                     <div class="friends-container">
-                        <h5 class="fw-bold">Friends list</h5>
-                        <hr>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <h5 class="fw-bold">Friends</h5>
+                                <a href="#" class="friend-see-all-friends-link d-flex justify-content-center align-items-center">See all friends</a>
+                            </div>
+                            <span id="friend-count" class="text-secondary fs-6"></span>
+                        </div>
+                
                         <div id="friends"></div>
                     </div> 
                 </div>
