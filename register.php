@@ -5,7 +5,6 @@
       exit();
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +47,6 @@
         <div class="mb-3">
           <label for="phone" class="form-label fw-bold">Phone Number</label>
           <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required />
-
           <span id="phone-error"></span>
         </div>
 
@@ -63,7 +61,6 @@
         <div class="registration-error">
           <span><?php echo $_SESSION["user-exist"]; ?></span>
         </div>
-
       </form>
     </div>
   </div>

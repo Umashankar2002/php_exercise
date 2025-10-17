@@ -22,15 +22,13 @@ body {
     text-align: center;
     margin-bottom: 1rem;
 }
-
 .container .login-box .form-control {
     height: 55px;
 }
 .text-center .create-button {
     width: 200px;
 }
-
-.error-message {
+.container .login-box .error-message {
     color: red !important;
     font-weight: bold;
     margin-top: 10px;
@@ -44,24 +42,23 @@ body {
      background-color: #f0f2f5;
     font-family: Helvetica, Arial, sans-serif;
 }
-.form-label {
+.container .register-box .mb-3 .form-label {
     margin-bottom: 0.25rem;
     font-weight: 500;
 }
-.registration-error {
+.container .register-box .registration-error {
     font-weight: 900;
     color: red;
     display: flex;
     justify-content: center;
     margin-top: 15px;
 }
-#phone-error {
+.container .register-box .mb-3 #phone-error {
     color: red;
     margin-top: 16px;
     font-weight: 500;
     margin-left: 2px;
 }
-
 .message-popup{
     position: fixed;
     top:0%;

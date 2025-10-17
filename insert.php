@@ -1,7 +1,5 @@
-
 <?php 
-    include "database.php";
-    
+    include "database.php";    
     session_start();
     $data = $_POST["comment"];
     $user_id = $_SESSION["userid"];

@@ -1,4 +1,3 @@
-
 <?php 
     session_start();
     include "database.php";
@@ -13,10 +12,8 @@
         $_SESSION["user-exist"] = "Invalid phone number";
         header("Location: register.php");
         exit();
-    }
-    
+    }    
     $query = "SELECT * FROM tUser WHERE email_id = '$email'";
-
     $sql = "INSERT INTO tUser (user_id, name, email_id, password, address, phone) VALUES (11, '$name', '$email', '$password', '$address', '$phone')";
     $data = "";
     try {
@@ -44,6 +41,4 @@
     catch(Exception $e) {
         echo $e;
     }
-
-    
 ?>

@@ -14,7 +14,6 @@ try {
 
 if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_assoc($result);
-    
     if ($row["password"] == $password) {
         $_SESSION["userid"] = $row["user_id"];
         $_SESSION["username"] = $row["name"];

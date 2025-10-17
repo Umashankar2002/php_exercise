@@ -7,7 +7,7 @@ body {
 body.modal-open {
   overflow: hidden;
 }
-.facebook-container{
+.facebook-root-container .facebook-container{
     display: flex;
     flex-direction: column;;
     justify-content: center;
@@ -32,7 +32,7 @@ body.modal-open {
 .row {
     --bs-gutter-x: 0rem;
 }
-.navbar-container {
+.facebook-root-container .navbar-container {
     height: 3.5rem;
     position: sticky;
     top: 0;
@@ -40,20 +40,20 @@ body.modal-open {
     overflow: hidden;
     z-index: 5;
 }
-.navbar-left-content {
+.facebook-root-container .navbar-container .navbar-left-content {
     display: flex;
     gap: 8px;
     padding-left: 16px;
     align-items: center;
     padding-right: 0px !important;
 }
-.navbar-left-search {
+.facebook-root-container .navbar-container .navbar-left-content .navbar-left-search {
     background-color: #F0F2F5;
 }
-.left-nav-search-symbol {
+.facebook-root-container .navbar-container .navbar-left-content .left-nav-search-symbol {
     padding-left: 11px;
 }
-#left-nav-input {
+.facebook-root-container .navbar-container .navbar-left-content #left-nav-input {
     border: none;
     outline: none;
     padding-left: 3px;
@@ -68,24 +68,46 @@ body.modal-open {
 /* *******************
     navbar center section
 **********************/
-.navbar-center-content {
+.facebook-root-container .navbar-container .navbar-center-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 113px;
+    gap: 18px;
 }
-
+.facebook-root-container .navbar-container .navbar-center-content .nav-bar-img-container {
+    width: 120px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.facebook-root-container .navbar-container .navbar-center-content .nav-bar-img-container:hover {
+    background-color: #f0f2f3;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.update-message-popup {
+    position: fixed;
+    top:0%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+}
 /* *******************
     navbar right section
 ************************/
-.navbar-right-content {
+.facebook-root-container .navbar-container .navbar-right-content {
     display: flex;
     justify-content: end;
     align-items: center;
     padding-right: 16px;
     gap: 8px;
 }
-.navbar-right-symbols {
+.facebook-root-container .navbar-container .navbar-right-content .navbar-right-symbols {
     height: 40px;
     width: 40px;
     display: flex;
@@ -96,10 +118,10 @@ body.modal-open {
     cursor: pointer;
 }
 
-.profile {
+.facebook-root-container .navbar-container .navbar-right-content .profile {
     position: relative;
 }
-.downarrow {
+.facebook-root-container .navbar-container .navbar-right-content .downarrow {
     position: absolute;
     top: 35px;
     right: 16px;
@@ -108,23 +130,7 @@ body.modal-open {
     width: 14px;
     border-radius: 50%;
 }
-
-/*  */
-#profile-details-container {
-    display: none;
-    position: fixed;
-    top: 8%;
-    right: 25px;
-    background-color: white;
-    z-index: 10;
-    padding: 10px;
-    min-width: 250px;
-    /* display: flex; */
-    flex-direction: column;;
-    gap: 15px;
-    border-radius: 8px;
-}
-.logout {
+.facebook-root-container .navbar-container .navbar-right-content .logout {
     width: 100px;
     height: 35px;
     color: white;
@@ -136,34 +142,49 @@ body.modal-open {
     background-color: red;
     margin-top: 12px;
 }
-.detail-line {
+
+/***************************
+    profile detail section 
+*****************************/
+.facebook-root-container .facebook-container #profile-details-container {
+    display: none;
+    position: fixed;
+    top: 8%;
+    right: 25px;
+    background-color: white;
+    z-index: 10;
+    padding: 10px;
+    min-width: 250px;
+    flex-direction: column;;
+    gap: 15px;
+    border-radius: 8px;
+}
+.facebook-root-container .facebook-container #profile-details-container .detail-line {
     margin: 12px 4px 0px 4px;
 }
-.profile-name {
+.facebook-root-container .facebook-container #profile-details-container .profile-name {
     text-decoration: none;
     color: black;
     cursor: pointer;
     width: 100%;
     display: block;
 }
-.profile-name:hover {
+.facebook-root-container .facebook-container #profile-details-container .profile-name:hover {
     display: block;
     background-color: #e0e2e4;
     border-radius: 8px;
 }
-
-.edit-details-container {
+.facebook-root-container .facebook-container .edit-details-container {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
-    /* transform: translate(-50%, -50%); */
     z-index: 100;
     width: 100vw;
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.85);
 }
-.message-popup{
+.message-popup {
     position: fixed;
     top:0%;
     left: 50%;
@@ -174,39 +195,37 @@ body.modal-open {
     justify-content: center;
     align-items: center;
 }
-.edit-details {
+.facebook-root-container .facebook-container .edit-details-container .edit-details {
     width: 700px;
-    /* padding: 20px; */
+    max-height: 60vh;
+    overflow-y: auto;
+    position: absolute;
+    top: 60px;
 }
-.card-body {
+.facebook-root-container .facebook-container .edit-details-container .edit-details .card-body {
     padding: 20px;
 }
-.edit-form-control, .form-control {
+.facebook-root-container .facebook-container .edit-details-container #editProfileForm .edit-form-control, .facebook-root-container .facebook-container .edit-details-container .form-control {
     height: 80px;
     border: none;
-    /* border-bottom: rgb(168, 166, 166) solid 1px; */
     border-radius: 10px;
     outline: none;
     box-shadow: none;
 }
-.form-control:focus, .edit-form-control:focus {
+.facebook-root-container .facebook-container .edit-details-container .form-control:focus, .facebook-root-container .facebook-container .edit-details-container .edit-form-control:focus {
     border: none;
     box-shadow: none;
-    /* border-bottom: rgb(168, 166, 166) solid 1px;     */
 }
-#phone-error {
+.facebook-root-container .facebook-container .edit-details-container #phone-error {
     color: red;
     margin-top: 10px;
 }
-.edit-profile-form-field {
+.facebook-root-container .facebook-container .edit-details-container .edit-profile-form-field {
     display: flex;;
     flex-direction: column;;
     gap: 16px;
 }
-.cross-img {
-    /* position: absolute;
-    right: 24px;
-    top: 26px; */
+.facebook-root-container .facebook-container .edit-details-container .edit-details .cross-img {
     height: 30px;
     width: 30px;
     display: flex;
@@ -216,19 +235,18 @@ body.modal-open {
     border-radius: 50%;
     cursor: pointer;
 }
-.details-cancel-button {
+#editProfileForm .details-cancel-button {
     background-color: #e0e2e4;
     font-weight: 900;
 }
-.details-cancel-button:hover {
+#editProfileForm .details-cancel-button:hover {
     background-color: #969899;
 }
-.details-save-button {
+#editProfileForm .details-save-button {
     padding-left: 40px;
     padding-right: 40px;
     font-weight: 900;
 }
-/*  */
 
 /* *********************
     cover image part
@@ -242,13 +260,11 @@ body.modal-open {
     position: relative;
     z-index: 2;
 }
-
 .img-container {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     overflow: hidden;
 }
-
 .cover-img {
     margin-top: -210px;
     height: 1250px;
@@ -317,13 +333,11 @@ body.modal-open {
     border-radius: 8px;
     background-color: #e0e2e4;
 }
-
 .arrowdown-button {
     padding: 6px 18px;
     border-radius: 8px;
     background-color: #e0e2e4;
 }
-
 .line {
     border-top: solid #d5d6d8 1px;
     margin-left: 33px;
@@ -331,11 +345,10 @@ body.modal-open {
     margin-top: 17px;
 }
 
-
 /* *****************************
     more details section
 ********************************/
-.more-details-container {
+.facebook-container .more-details-container {
     height: 60px;
     display: flex;
     justify-content: space-between;
@@ -343,11 +356,10 @@ body.modal-open {
     padding-left: 33px;
     padding-right: 33px;
 }
-
-.more-details {
+.facebook-container .more-details-container .more-details {
     display: flex;
 }
-.information {
+.facebook-container .more-details-container .information {
     padding: 20px 16px;
     font-size: 15px;
     font-weight: 700;
@@ -358,33 +370,29 @@ body.modal-open {
     color: #0064D1;
     border-bottom: #0064D1 solid 3px;
 }
-.three-dots-button {
+.more-details-container .three-dots-button {
     padding: 6px 14px;
     border-radius: 8px;
     background-color: #e0e2e4;
 }
 
-/* intro section */
-#comments-main-container {
+/************************
+     intro section 
+**************************/
+.facebook-root-container #comments-main-container {
     display: flex;
     justify-content: center;
     background-color: #F2F4F7;
 }
-
-#comment-container {
+#comments-main-container #comment-container {
     width: 1180px;
 }
-
-.intro-top-text {
+.facebook-root-container #comments-main-container .intro-top-text {
     font-size: 15px;
     padding-top: 8px;
     padding-bottom: 10px;
 }
-hr {
-    margin: 0px;
-}
-
-#intro-container{
+#comments-main-container #intro-container {
     padding-top: 15px;
     padding-right: 3px;
 }
@@ -392,19 +400,17 @@ hr {
     padding-top: 15px;
     padding-left: 13px;
 }
-.comment-section-intro, .comment-section-post {
+#comments-main-container .comment-section-intro, .comment-section-post {
     font-size: 20px;
     font-weight: 700;
 }
-.intro, .friends-container {
+#intro-container .intro, #comments-main-container .friends-container {
     background-color: white;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
     border-radius: 12px;
     padding: 14px 15px 0px 15px;
 }
-
-
-.post {
+#post-container .post {
     background-color: white;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
     border-radius: 12px;
@@ -414,8 +420,10 @@ hr {
     justify-content: space-between;
 }
 
-/* inrto content */
-.intro-content-container {
+/********************
+     inrto content 
+**********************/
+#intro-container .intro-content-container {
     padding: 15px;
     padding-top: 18px;
     padding-left: 0px;
@@ -423,107 +431,90 @@ hr {
     flex-direction: column;
     gap: 16px;
 }
-
-.intro-content {
+#comments-main-container .intro-content {
     display: flex;
     gap: 12px;
 }
-
-.intro-text {
+#comments-main-container .intro-text {
     font-size: 15px;
 }
-
-#meta-channel-link {
+#comments-main-container #meta-channel-link {
     text-decoration: none;
 }
-
-.intro-followers-count {
+#comments-main-container .intro-followers-count {
     font-size: 13px;
 }
-
-.intro-img {
+.intro-content-container .intro-img {
     filter: invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(150%);
 }
-
-.filter-button {
+#post-container .filter-button {
      padding: 6px 15px;
     border-radius: 8px;
     background-color: #e0e2e4;
 }
-
-#filter-bustton-text {
+#post-container #filter-bustton-text {
     font-size: 15px;
     font-weight: 700;
 }
-
-/* friends */
 .friend-list-images {
-    width: 100%;                /* Fill the grid cell */
-    aspect-ratio: 1 / 1;        /* Keep square shape */
-    object-fit: cover;          /* Crop the image to fill */
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 8px;
-
 }
-.friend-see-all-friends-link {
+.friends-container .friend-see-all-friends-link {
     font-size: 17px;
     text-decoration: none;
     padding: 6px;
     border-radius: 5px;
 }
-.friend-see-all-friends-link:hover {
+.friends-container .friend-see-all-friends-link:hover {
     background-color: #faf5f5;
-
 }
 .friend-name {
     word-wrap: break-word;
 }
-.friends-container {
+#comments-main-container .friends-container {
     margin-top: 15px;
     padding-bottom: 14px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-#friends {
+.friends-container #friends {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
-.friend {
-    /* text-align: center; */
+.friends-container .friend {
     font-size: 13px;
-    
-    padding: 0px;                /* Space inside the border */
-    /* margin-left: 10px;  */
-    border-radius: 5px;           /* Optional: makes the corners rounded */
-    /* background-color: #f9f9f9;  */
+    padding: 0px;
+    border-radius: 5px;
     width: 100%;  
-    
-    aspect-ratio: 1 / 1;        /* Keep square shape */
-    object-fit: cover;          /* Crop the image to fill */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 5px; 
-   
-    
 }
-
-.friend-link {
+.friends-container .friend-link {
     text-decoration: none;
     color: black;
 }
 
-/* comment container */
-#printing-comments-section {
+/************************
+    comment container 
+***************************/
+#post-container .comment-root-container #printing-comments-section {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.comment-root-container {
+#post-container .comment-root-container {
     padding-top: 13px;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.comment-container {
+#post-container .comment-root-container .comment-container {
     padding: 15px 15px 8px 15px;
     background-color: white;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
@@ -531,11 +522,11 @@ hr {
     position: relative;
     height: 150px;
 }
-.comment-input-flied {
+#post-container .comment-root-container .comment-container .comment-input-flied {
     width: 100%;
     height: 80px;
 }
-.comment-post-button {
+#post-container .comment-root-container .comment-post-button {
     border-radius: 8px;
     background-color: #0866FF;
     padding: 6px 15px 6px 15px;
@@ -546,11 +537,13 @@ hr {
     right: 14px;
     bottom: 9px;
 }
-.comment-post-button:hover {
+#post-container .comment-root-container .comment-post-button:hover {
     background-color: #044abb;
 }
 
-/* post comments */
+/*********************
+    post comments 
+***********************/
 .post-comments {
     height: auto;
     padding: 14px 15px 8px 15px;
@@ -575,19 +568,19 @@ hr {
 .user-name-of-post {
     font-size: 15px;
     font-weight: 700;
-    
 }
 .date-of-post {
     font-size: 13px;
     font-weight: 700;
 }
-
 .text-comment {
     padding-top: 15px;
     word-wrap: break-word;
 }
 
-/* post likes section */
+/*************************
+     post likes section 
+***************************/
 .post-likes-section {
     display: flex;
     justify-content: space-between;
@@ -607,18 +600,18 @@ hr {
     font-size: 15px;
     color: #65686C;
 }
-
 .comments-shares-container {
     display: flex;
     gap: 15px;
 }
-
 .comments-count, .shares-count {
     font-size: 15px;
     color: #65686C;
 }
 
-/* post */
+/****************
+     post 
+******************/
 .post-footer-container {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -629,19 +622,20 @@ hr {
     justify-content: center;
     gap: 8px;
 }
-
 .post-footer {
     font-size: 15px;
     font-weight: 700;
     color: #65686C;
 }
 
-/* edit */
-.edit-container {
+/****************
+     edit 
+******************/
+#editProfileForm .edit-container {
     display: flex;
     justify-content: space-between;
 }
-.edit-button {
+#editProfileForm .edit-button {
     height: 25px;
     width: 55px;
     display: flex;
@@ -649,60 +643,53 @@ hr {
     align-items: center;
     font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
-    /* font-weight: 900; */
     border: none;
     background-color: white;
     color: #0064D1;
 }
-.edit-hr-line {
+.edit-details-container .edit-hr-line {
     margin: 30px -20px 0px -20px;
 }
 .edit-button:hover {
     background-color: #ebe8e8;
 }
 .edit-button.active {
-  background-color: #0d6efd;  /* Bootstrap primary blue */
+  background-color: #0d6efd;
   color: #fff;
   border-color: #0d6efd;
   box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
 }
-.edit-form-control {
+.edit-details-container #editProfileForm .edit-form-control {
     width: 40%;
     text-align: center;
 }
-.edit-input-field {
+.edit-details-container #editProfileForm .edit-input-field {
     display: flex;
     justify-content: center;
 }
 
-@media (min-width:1024px) and (max-width:1390px) {
-    #left-nav-input{
-        display: none;
+@media (min-width:1259px) and (max-width:1390px) {
+     .facebook-root-container .navbar-container .navbar-center-content {
+        gap: 7px;
+        justify-content: left;
     }
-    .left-nav-search-symbol {
-        height: 40px;
-        width: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-left: 0px;
-    }
-    
 }
-@media (min-width:768px) and (max-width:1024px) {
-    .facebook-container::after {
-        background: none;       
+@media (min-width:769px) and (max-width:1300px) {
+    /*******************************
+        left navbar search section
+    ********************************* */
+    .line {
+        margin-left: 90px !important;
+        margin-right: 90px !important;
     }
-
     .img-container {
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-    #left-nav-input{
+    .facebook-root-container .navbar-container .navbar-left-content #left-nav-input {
         display: none;
     }
-    
-    .left-nav-search-symbol {
+    .facebook-root-container .navbar-container .navbar-left-content .left-nav-search-symbol {
         height: 40px;
         width: 40px;
         display: flex;
@@ -710,19 +697,17 @@ hr {
         align-items: center;
         padding-left: 0px;
     }
-
     .cover-img {
         width: 100%;
         height: 1030px;
         margin-top: -174px;
         border-radius: 0px;
     }
-    .img-container {
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }
 
-    #comments-main-container {
+    /* **********************
+        followers section
+    ************************* */
+    .facebook-root-container #comments-main-container {
         padding: 0px 16px;
     }
     #followers-container {
@@ -731,22 +716,49 @@ hr {
     .follower-buttons-container {
         padding-right: 17px;
     }
-    .more-details-container {
-        padding-left: 17px;
-        padding-right: 17px;
+    .facebook-container .more-details-container {
+        padding-left: 90px !important;
+        padding-right: 90px !important;
     }
     #cover-image-container {
-        height: 525px;
+        height: 500px;
     }
-
-    .navbar-center-content{
-        gap: 83px;
+    .facebook-root-container .navbar-container .navbar-center-content{
+        gap: 0px;
+    }
+    .body-container {
+        width: 92%;
+    }
+    .cover-image-container {
+        height: 495px;
+    }
+    .img-container {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+    #followers-container {
+        padding-left: 90px;
+        padding-right: 75px;
+    }
+    .facebook-container .more-details-container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+    .facebook-root-container #comments-main-container {
+        padding: 0px 135px !important;
+    }
+    .cover-img {
+        height: 960px;
+        margin-top: -160px;
     }
     
 }
 
-@media (min-width:425px) and (max-width: 768px) {
 
+@media (min-width:425px) and (max-width: 780px) {
+    /************************
+        cover image section
+    ************************* */
     .img-container {
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
@@ -754,10 +766,10 @@ hr {
     .facebook-container::after {
         background: none;       
     }
-    #left-nav-input {
+    .facebook-root-container .navbar-container .navbar-left-content #left-nav-input {
         display: none;
     }
-    .left-nav-search-symbol {
+    .facebook-root-container .navbar-container .navbar-left-content .left-nav-search-symbol {
         height: 40px;
         width: 40px;
         display: flex;
@@ -765,11 +777,10 @@ hr {
         align-items: center;
         padding-left: 0px;
     }
-    #comments-main-container {
+    .facebook-root-container #comments-main-container {
         padding-left: 44px;
         padding-right: 44px;
     }
-
     #followers-container {
         flex-direction: column;
         align-items: center;
@@ -777,7 +788,9 @@ hr {
         padding-left: 0px;
         gap: 20px;
     }
-
+    .body-container {
+        width: 100%;
+    }
     #cover-image-container {
         height: 545px;
     }
@@ -786,6 +799,10 @@ hr {
         margin-top: -128px;
         width: 100%;
     }
+
+    /********************
+        followers scrion
+    ********************* */
     .followers-content {
         margin-top: 10px;
         margin-left: 0px;
@@ -795,10 +812,12 @@ hr {
     .follower-buttons-container {
         padding: 0px;
     }
-    .navbar-center-content {
-        gap: 44px;
+    .facebook-root-container .navbar-container .navbar-center-content {
+        gap: 0px;
     }
-
+    .nav-bar-img-container {
+        width: 70px;
+    }
     .post-comments {
         width: 88.5vw;
     }
@@ -807,8 +826,10 @@ hr {
     }
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
-
+@media (min-width: 375px) and (max-width: 425px) {
+    /**********************
+        cover image section
+    ********************** */
     .img-container {
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
@@ -820,10 +841,10 @@ hr {
         height: 420px;
     }
     .cover-img {
-        height: 425px;
+        height: 417px;
         margin-top: -72px;
     }
-    #comments-main-container {
+    .facebook-root-container #comments-main-container {
         padding-left: 16px;
         padding-right: 13px;
     }
@@ -833,11 +854,10 @@ hr {
     .follow-search-button, .follow-button {
         padding: 8px 35px 8px 35px;
     }
-    .more-details-container {
+    .facebook-container .more-details-container {
         padding-left: 17px;
         padding-right: 17px;
     }
-
     .body-container {
         width: 100%;
     }
@@ -845,9 +865,13 @@ hr {
         width: 100%;
     }
 
+    /**********************
+        followers section
+    *********************** */
     #followers-container {
         flex-direction: column;
         padding-left: 0px;
+        margin-top: -80px;
     }
     .follower-buttons-container {
         padding-right: 0px;
@@ -855,18 +879,16 @@ hr {
     .intro-study-content {
         margin-top: -4px;
     }
-
     .post-comments {
         width: 93vw;
     }
-
     #post-container {
         padding-left: 0px;
     }
-    #left-nav-input{
+    .facebook-root-container .navbar-container .navbar-left-content #left-nav-input{
         display: none;
     }
-    .left-nav-search-symbol {
+    .facebook-root-container .navbar-container .navbar-left-content .left-nav-search-symbol {
         height: 40px;
         width: 40px;
         display: flex;
@@ -874,13 +896,27 @@ hr {
         align-items: center;
         padding-left: 0px;
     }
+    .followers-content {
+        align-items: center;
+        margin: 0px;
+        margin-top: 10px;
+    }
+    .follower-buttons-container {
+        padding-bottom: 0px;
+        padding-left: 15px;
+        padding-top: 20px;
+        padding-right: 10px;
+    }
 }
 
 @media (max-width: 375px) {
-    #left-nav-input{
+    /*********************************
+        left navbar search section
+    **********************************/
+    .facebook-root-container .navbar-container .navbar-left-content #left-nav-input{
         display: none;
     }
-    .left-nav-search-symbol {
+    .facebook-root-container .navbar-container .navbar-left-content .left-nav-search-symbol {
         height: 40px;
         width: 40px;
         display: flex;
@@ -891,6 +927,10 @@ hr {
      .arrowdown-button {
         padding: 6px 33px 7px 33px;
     }
+
+    /***********************
+        folowers section
+    ************************/
     .follow-search-button, .follow-button {
         padding: 7px 28px 7px 28px;
     }
@@ -909,10 +949,10 @@ hr {
         margin: 0px;
         margin-top: 10px;
     }
-    #left-nav-input {
+    .facebook-root-container .navbar-container .navbar-left-content #left-nav-input {
         display: none;
     }
-    .left-nav-search-symbol {
+    .facebook-root-container .navbar-container .navbar-left-content .left-nav-search-symbol {
         height: 40px;
         width: 40px;
         display: flex;
@@ -920,6 +960,10 @@ hr {
         align-items: center;
         padding-left: 0px;
     }
+
+    /************************
+        cover image section
+    *************************/
     #cover-image-container {
         height: 401px;
     }
@@ -934,7 +978,6 @@ hr {
     .intro-study-content {
         margin-top: -4px;
     }
-
     .img-container {
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
@@ -942,11 +985,11 @@ hr {
     .facebook-container::after {
         background: none;       
     }
-    #comments-main-container {
+    .facebook-root-container #comments-main-container {
         padding-left: 16px;
         padding-right: 13px;
     }
-    .more-details-container {
+    .facebook-container .more-details-container {
         padding-left: 17px;
         padding-right: 17px;
     }
@@ -954,23 +997,21 @@ hr {
         flex-direction: column;
         padding-left: 0px;
     }
-
     .post-comments {
         width: 93vw;
     }
-
     #post-container {
         padding-left: 0px;
     }
-
-#friends {
-    
-    grid-template-columns: repeat(2, 1fr);
-    
-}
+    #friends {
+        grid-template-columns: repeat(2, 1fr);    
+    }
 }
 
 @media (max-width: 325px) {
+    /***********************
+        cover image section
+    ************************/
     .arrowdown-button {
         padding: 6px 26px 7px 23px;
     }
@@ -992,24 +1033,18 @@ hr {
         padding-top: 23px;
     }
     #cover-image-container {
-        height: 422px;
+        height: 384px;
     }
-
     .post-comments {
         width: 93vw;
     }
     #printing-comments-section {
         align-items: center;
     }
-     /* #comments-main-container {
-        padding-left: 20px;
-        padding-right: 23px;
-    } */
      #comment-container {
-    width: 300px;
-}
-
-#left-nav-input{
+        width: 300px;
+    }
+    .facebook-root-container .navbar-container .navbar-left-content #left-nav-input{
         display: none;
     }
 }

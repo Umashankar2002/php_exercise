@@ -1,9 +1,10 @@
-
 <?php 
     include "database.php";
-
     session_start();
 
+    /*=======================
+       popup section
+    ========================= */
     $showLoginPopup = false;
     $message = "";
     if (isset($_SESSION["login_success"])) {
@@ -12,12 +13,6 @@
         unset($_SESSION["login_success"]);
     }
 
-    if (isset($_SESSION["update_success"])) {
-        $showLoginPopup = true;
-        $message = "update success";
-        unset($_SESSION["update_success"]);
-    }
-    
     if(!$_SESSION["userid"]) {
         header("Location: index.php");
         exit();
@@ -31,10 +26,12 @@
         $log_message = "Login";
     }
     
+    /*=======================
+        login user id and name
+    ========================= */
     if (!isset($_SESSION['original_userid'])) {
         $_SESSION['original_userid'] = $_SESSION['userid'];
     }
-    // $login_user_id = $_SESSION["userid"];
     $userenteredid = $_SESSION["userid"];
     if(isset($_GET['friendid'])) {
         $userenteredid = $_GET['friendid'];
@@ -46,9 +43,6 @@
         $friend_name = $_GET['friendname'];
     }
 
-
-     
-    // include "database.php";
     $userid = $_SESSION['original_userid'];
     $sql = "SELECT * FROM tUser WHERE user_id = $userid";
 
@@ -71,9 +65,6 @@
         echo "Error: " . $e->getMessage();
         exit;
     }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +84,7 @@
             navbar section
           ***********************-->
         <div class="row navbar-container">
-            <div class="col-md-3 col-sm-5 col-2 navbar-left-content">
+            <div class="col-xxl-3 col-xl-4 col-md-3 col-sm-5 col-2 navbar-left-content">
                 <img src="assets/img/facebook.svg" alt="not found">
                 <label for="search" class="rounded-pill navbar-left-search">
                     <span class="left-nav-search-symbol"><img src="assets/img/search.svg" alt=""></span>
@@ -101,12 +92,20 @@
                 </label>
             </div>
             <div class="col-md-6 navbar-center-content d-none d-sm-flex">
-                <img src="assets/img/home.svg" alt="" class="nav-center-img">
-                <img src="assets/img/friends.svg" alt="" class="nav-center-img">
-                <img src="assets/img/watch.svg" alt="" class="nav-center-img">
-                <img src="assets/img/account.svg" alt="" class="nav-center-img">
+                <div class="nav-bar-img-container">
+                    <img src="assets/img/home.svg" alt="" class="nav-center-img" data-bs-toggle="tooltip" title="Home">
+                </div>
+                <div class="nav-bar-img-container">
+                    <img src="assets/img/friends.svg" alt="" class="nav-center-img" data-bs-toggle="tooltip" title="Friends">
+                </div>
+                <div class="nav-bar-img-container">
+                    <img src="assets/img/watch.svg" alt="" class="nav-center-img" data-bs-toggle="tooltip" title="Video">
+                </div>
+                <div class="nav-bar-img-container">
+                    <img src="assets/img/account.svg" alt="" class="nav-center-img" data-bs-toggle="tooltip" title="Groups">
+                </div>
             </div>
-            <div class="col-md-3 col-sm-7 col-10 navbar-right-content">
+            <div class="col-xxl-3 col-xl-2 col-md-3 col-sm-7 col-10 navbar-right-content">
                 <div class="navbar-right-symbols"><img src="assets/img/list.svg" alt=""></div>
                 <div class="navbar-right-symbols"><img src="assets/img/messanger.svg" alt=""></div>
                 <div class="navbar-right-symbols"><img src="assets/img/notification.svg" alt=""></div>
@@ -116,6 +115,9 @@
             </div>
         </div>
         
+        <!-- ********************
+            popup code
+         *********************** -->
         <?php 
             if($showLoginPopup) { ?>
                 <div class="alert alert-success alert-dismissible fade show message-popup" role="alert">
@@ -123,7 +125,6 @@
                 </div>
         <?php   }
         ?>
-        
         <!--*******************
             cover image section
           ***********************-->
@@ -135,24 +136,19 @@
                     <button class="logout"><?php echo $log_message; ?></button>
                 </form>
             </div>
-
             <div class="body-container">
                 <div id="cover-image-container">
                     <div class="img-container">
                         <img src="assets/img/cover-img.jpg" alt="" class="cover-img">
                     </div>
-
-                    
                     <div id="followers-container">
                         <div class="d-flex flex-column flex-lg-row align-items-center">
                             <img src="assets/img/mark-zuckerberg.jpg" alt="" height="175px" width="175px" class="rounded-circle p-1 mark-image">
-
                             <div class="followers-content">
                                 <h1 class="mark-zuckerberg-text"><?php echo $friend_name; ?>
                                     <img src="assets/img/verified-account.svg" alt="">
                                 </h1>
                                 <span class="followers-count">120M followers</span>
-
                                 <div class="followers-image-container">
                                     <img src="assets/img/profile1.jpg" alt="" class="rounded-circle">
                                     <img src="assets/img/profile1 (1).jpg" alt="" class="follower-images rounded-circle">
@@ -165,14 +161,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="follower-buttons-container">
                             <button class="follow-button"><i class="fa-solid fa-folder-plus" style="color: white;"></i> Follow</button>
                             <button class="follow-search-button"><img src="assets/img/search.svg" alt=""> Search</button>
                             <span class="arrowdown-button"><img src="assets/img/downarrow.svg" alt=""></span>
                         </div>
                     </div>
-                    
                 </div>
                 
                 <!-- straight line -->
@@ -190,13 +184,12 @@
                     </div>
                     <span class="three-dots-button"><img src="assets/img/three-dots.svg" alt=""></span>
                 </div>
-
-
-                
             </div>
         </div>
 
-        <!-- inro section -->
+        <!-- ********************
+            inro section 
+         ***********************-->
         <div id="comments-main-container">
             <div class="row" id="comment-container">
                 <div class="col-lg-5 col-12" id="intro-container">
@@ -206,7 +199,6 @@
                             <span class="intro-top-text">Bringing the world closer together.</span>
                         </div>
                         <hr>
-
                         <div class="intro-content-container">
                             <div class="intro-content">
                                 <div>
@@ -276,7 +268,9 @@
                         </div>
                     </div>
                     
-                    <!-- friends list -->
+                    <!-- *********************
+                        friends list 
+                    *************************-->
                     <div class="friends-container">
                         <div>
                             <div class="d-flex justify-content-between">
@@ -303,91 +297,100 @@
                             </form>
                         </div>
                     
-                        <!-- comments section -->
+                        <!-- ********************
+                            comments section 
+                         ***************************-->
                         <div id="printing-comments-section"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- logout -->
-      
-
-        <div class="edit-details-container">
-            <div class="d-flex justify-content-center align-items-center min-vh-100">
-                <div class="edit-details">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <div class="card-title mb-4 position-relative text-center">
-                                <h3 class="fs-5 fw-bold">Edit profile</h3>
-                                <span class="cross-img position-absolute top-0 end-0">
-                                    <img src="assets/img/cross1.png" alt="">
-                                </span>
-                                <hr class="edit-hr-line">
-                            </div>
-
-                            <form action="updating_details.php" method="post">
-                                <div class="edit-profile-form-field">
-                                    <div class="mb-3">
-                                        <div class="edit-container">
-                                            <label for="name" class="form-label fw-bold">Name</label>
-                                            <button class="edit-button">Edit</button>
-                                        </div>
-                                        <div class="edit-input-field">
-                                            <input type="text" class="edit-form-control" id="name" name="name" placeholder="Enter your name" value="<?php echo $name; ?>" required>
-                                        </div>
+        <!-- *************************
+                logout 
+            **************************-->
+    <div id="popupContainer"></div>
+    
+    <!-- *************************
+                Edit form section
+            **************************-->
+    <div class="edit-details-container">
+        <div class="d-flex justify-content-center align-items-center min-vh-100">
+            <div class="edit-details">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="card-title mb-4 position-relative text-center">
+                            <h3 class="fs-5 fw-bold">Edit profile</h3>
+                            <span class="cross-img position-absolute top-0 end-0">
+                                <img src="assets/img/cross1.png" alt="">
+                            </span>
+                            <hr class="edit-hr-line">
+                        </div>
+                        <form id="editProfileForm">
+                            <div class="edit-profile-form-field">
+                                <div class="mb-3">
+                                    <div class="edit-container">
+                                        <label for="name" class="form-label fw-bold">Name</label>
+                                        <button class="edit-button">Edit</button>
                                     </div>
-                                    <div class="mb-3">
-                                        <div class="edit-container">
-                                            <label for="email" class="form-label fw-bold">Email</label>
-                                            <button class="edit-button">Edit</button>
-                                        </div>
-                                        <div class="edit-input-field">
-                                            <input type="email" class="edit-form-control" id="email" name="email" placeholder="Enter your email" value="<?php echo $email; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="edit-container">
-                                            <label for="password" class="form-label fw-bold">Password</label>
-                                            <button class="edit-button">Edit</button>
-                                        </div>
-                                        <div class="edit-input-field">
-                                            <input type="password" class="edit-form-control" id="password" name="password" placeholder="Enter new password" value="<?php echo $password; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="edit-container">
-                                            <label for="address" class="form-label fw-bold">Address</label>
-                                            <button class="edit-button">Edit</button>
-                                        </div>
-                                        <div class="edit-input-field">
-                                            <input type="text" class="edit-form-control" id="address" name="address" placeholder="Enter your address" value="<?php echo $address; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="edit-container">
-                                            <label for="phone" class="form-label fw-bold">Phone</label>
-                                            <button class="edit-button">Edit</button>
-                                        </div>
-                                        <div class="edit-input-field">
-                                            <input type="tel" class="edit-form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php echo $phone; ?>" required>
-                                        </div>
-                                        <span class="fw-bold" id="phone-error"></span>
-                                    </div>
-                                    <div class="d-flex justify-content-end gap-3">
-                                        <span type="submit" class="btn details-cancel-button">Cancel</span>
-                                        <button type="submit" class="btn btn-primary details-save-button">Save</button>
+                                    <div class="edit-input-field">
+                                        <input type="text" class="edit-form-control" id="name" name="name" placeholder="Enter your name" value="<?php echo $name; ?>" required>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="mb-3">
+                                    <div class="edit-container">
+                                        <label for="email" class="form-label fw-bold">Email</label>
+                                        <button class="edit-button">Edit</button>
+                                    </div>
+                                    <div class="edit-input-field">
+                                        <input type="email" class="edit-form-control" id="email" name="email" placeholder="Enter your email" value="<?php echo $email; ?>" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="edit-container">
+                                        <label for="password" class="form-label fw-bold">Password</label>
+                                        <button class="edit-button">Edit</button>
+                                    </div>
+                                    <div class="edit-input-field">
+                                        <input type="password" class="edit-form-control" id="password" name="password" placeholder="Enter new password" value="<?php echo $password; ?>" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="edit-container">
+                                        <label for="address" class="form-label fw-bold">Address</label>
+                                        <button class="edit-button">Edit</button>
+                                    </div>
+                                    <div class="edit-input-field">
+                                        <input type="text" class="edit-form-control" id="address" name="address" placeholder="Enter your address" value="<?php echo $address; ?>" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="edit-container">
+                                        <label for="phone" class="form-label fw-bold">Phone</label>
+                                        <button class="edit-button">Edit</button>
+                                    </div>
+                                    <div class="edit-input-field">
+                                        <input type="tel" class="edit-form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php echo $phone; ?>" required>
+                                    </div>
+                                    <span class="fw-bold" id="phone-error"></span>
+                                </div>
+                                <div class="d-flex justify-content-end gap-3">
+                                    <span type="submit" class="btn details-cancel-button">Cancel</span>
+                                    <button type="submit" class="btn btn-primary details-save-button">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- *****************
+                            update popup
+                            **************** -->
+                        <div id="responseMessage" class="mt-3 text-center fw-bold text-success" style="display: none;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="ajax.js"></script>
-
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="ajax.js"></script>
 </body>
 </html>

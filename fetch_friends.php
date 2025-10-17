@@ -3,12 +3,11 @@
     session_start();
 
     $userid = $_SESSION["backuserid"];
-
     $sql = "SELECT tu2.user_id, tu2.name FROM tUser AS tu
             INNER JOIN tFriends AS tf
             ON tu.user_id = tf.user_id
             INNER JOIN tUser AS tu2 ON tf.friend_id = tu2.user_id WHERE tu.user_id = $userid";
-    
+            
     $response = [
         'count' => 0,
         'html' => ''

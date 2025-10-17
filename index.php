@@ -1,5 +1,5 @@
 <?php
-session_start();
+  session_start();
 
   $showLoginPopup = false;
   $message = "";
@@ -9,19 +9,16 @@ session_start();
       unset($_SESSION["logout_success"]);
   }
   
-  // $showLoginPopup = false;
   if (isset($_SESSION["register_success"])) {
       $showLoginPopup = true;
       $message = "register success";
       unset($_SESSION["register_success"]);
   }
 
-// echo $_SESSION["userid"];
-if ($_SESSION["userid"]) {
-    header("Location: home.php");
-}
+  if ($_SESSION["userid"]) {
+      header("Location: home.php");
+  }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,17 +31,14 @@ if ($_SESSION["userid"]) {
   <link rel="stylesheet" href="login_register.css">
 </head>
 <body>
-
   <div class="container">
     <div class="login-box">
       <div class="fb-title">Facebook</div>
       <form action="check_login.php" method="POST">
         <div class="mb-3">
-            <!-- <label for="email" class="form-label">Email</label> -->
             <input type="email" class="form-control" name="email" placeholder="Email or phone number" required>
         </div>
         <div class="mb-3">
-            <!-- <label for="password" class="form-label">Password</label> -->
             <input type="password" class="form-control" name="password" placeholder="Password" required>
         </div>
         <div class="mb-3">
@@ -73,12 +67,8 @@ if ($_SESSION["userid"]) {
         <?php   }
         ?>
     </div>
-    
   </div>
-
-  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="ajax.js"></script>
-
+  <script src="ajax.js"></script>
 </body>
 </html>
